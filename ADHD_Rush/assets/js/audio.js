@@ -1,38 +1,42 @@
-import { ASSET_PATHS } from './config.js';
-
 export class AudioManager {
     constructor() {
-        this.hitSound = new Audio(ASSET_PATHS.sounds.hit);
-        this.startSound = new Audio(ASSET_PATHS.sounds.start);
-        this.powerupSound = new Audio(ASSET_PATHS.sounds.powerup);
+        this.hitSound = new Audio('assets/sounds/hit_obstacle.wav');
+        this.startSound = new Audio('assets/sounds/game_start.ogg');
+        this.powerupSound = new Audio('assets/sounds/powerup.wav');
         
-        this.initializeSounds();
-    }
-
-    initializeSounds() {
-        // Preload sounds
-        this.hitSound.load();
-        this.startSound.load();
-        this.powerupSound.load();
-
-        // Set volumes
+        // Set volume levels
         this.hitSound.volume = 0.6;
         this.startSound.volume = 0.4;
         this.powerupSound.volume = 0.5;
+        
+        // Preload sounds
+        this.preloadSounds();
     }
-
+    
+    preloadSounds() {
+        this.hitSound.load();
+        this.startSound.load();
+        this.powerupSound.load();
+    }
+    
     playStart() {
         this.startSound.currentTime = 0;
-        this.startSound.play();
+        this.startSound.play().catch(error => {
+            console.log("Audio play failed:", error);
+        });
     }
-
+    
     playHit() {
         this.hitSound.currentTime = 0;
-        this.hitSound.play();
+        this.hitSound.play().catch(error => {
+            console.log("Audio play failed:", error);
+        });
     }
-
+    
     playPowerup() {
         this.powerupSound.currentTime = 0;
-        this.powerupSound.play();
+        this.powerupSound.play().catch(error => {
+            console.log("Audio play failed:", error);
+        });
     }
 }

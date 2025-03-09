@@ -2,43 +2,48 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ADHD Rush</title>
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="game-container">
-        <div id="game-container">
-            <canvas id="game-canvas"></canvas>
-            <div id="score-display">Fokus: 0 | Lives: ❤️❤️❤️</div>  
-            <div id="message-box"></div>
-            
-            <div id="start-screen">
-                <h1 id="game-title">ADHD RUSH</h1>
-                <button id="start-button">START</button>
-            </div>
-            
-            <div id="game-over">
-                <h2>GAME OVER</h2>
+        <canvas id="game-canvas"></canvas>
+        
+        <div id="start-screen">
+            <h1 id="game-title">ADHD RUSH</h1>
+            <button id="start-button">START</button>
+        </div>
+        
+        <div id="game-over">
+            <h2>GAME OVER</h2>
+            <p>Typ wysłał 3 ściany tekstu.</p>
             <p id="final-score">Fokus: 0</p>
             <input type="text" id="nickname" placeholder="Twój nick" maxlength="20">
             <button id="save-score">Zapisz wynik</button>
             <div id="high-scores"></div>
             <button id="restart-button">SPRÓBUJ PONOWNIE</button>
+            <p>Na końcu miał być highscore - ale uznałem to za narzędzie przymusu i kontroli</p>
+            <p>Po co ja to zrobiłem? Bo jestem akustyczny. Wolę 40h kodować w duecie z Claude.ai - niż dawać jakieś gówno na urodziny.</p>
+
+            <p>Czy to fajne? Jeżeli zrealizuję cały plan do 25.03? Tak, będzie fajne.</p>
+            <p>07.03.2025 - jest średnio XD</p>
+            <p>09.03.2025 - po ki chuj ja pisałem silnik od podstaw? BYŁO PODPIERDOLIĆ</p>
+            <p>10.03.2025 - błąd na błędzie. Kurwa - Nadia miałą pływać motorówką. "Dam radę, to proste działania na wektorach", idź Pan w chuj xD</p>
         </div>
         
         <div id="damian-intro-dialog" style="display: none;">
             <div class="dialog-content">
-                <h2>Damian:</h2>
-                <p>Hej! To ja, Twój spamer nr 1 – mam milion rzeczy do powiedzenia i zero hamulców, a DM-y już lecą jak pociski.</p>
-                <p>Unikaj, blokuj, ghostuj – to symulator Twojego ADHD, a ja jestem chaosem, który próbuje się przebić!</p>
-                <p>Dzięki, że jesteś!</p>
-                <button id="ghost-button" class="neon-button">Ghostuj</button>
-            </div>
+                <p><b>Unikaj, blokuj, ghostuj</b> – to symulator Twojego ADHD, a ja jestem chaosem, który próbuje się przebić!</p>
+                <p><b><i>Czyli dzień jak co dzień.</i></b></p>
+                <p>Gierka jest wolna od danych personalnych czy delikatniejszych informacji</p>
+                <button id="ghost-button" class="neon-button">Ghostuj...</button>
+                <p><i>Kod?<a href="https://github.com/Ozyrsky/Nadia/tree/main/ADHD_Rush"> o, tu se kliknij!</a></i></p>
+                <p>Licencja - Damian mam to w dupie free. Pozdrawiam!</p>
         </div>
       
-
         <div id="high-scores-table" style="display: none;">
             <h3>Najlepsze wyniki</h3>
             <table>
@@ -53,16 +58,13 @@
             </table>
         </div>   
     
-        <div id="dm-overlay" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.9); padding: 20px; border-radius: 10px; text-align: center;">
+        <div id="dm-overlay" style="display: none;">
             <h3>📱 Damian sent you a DM!</h3>
             <p id="damian-message"></p>
             <button id="ghost-button" class="neon-button">Ghost him!</button>
         </div>  
-    
-        </div>
     </div>
     
     <script type="module" src="assets/js/game.js"></script>
-
 </body>
 </html>

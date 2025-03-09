@@ -1,6 +1,6 @@
-import { GAME_CONFIG } from './config.js';
+import { GAME_CONFIG, ASSET_PATHS } from './config.js';
 
-export { GameObject, Obstacle, PowerUp, FocusPoint, Pipe };
+export { GameObject, DM, PowerUp, FocusPoint, Obstacle };
 
 class GameObject {
     constructor(x, y, width, height, speed, color) {
@@ -10,73 +10,110 @@ class GameObject {
         this.height = height;
         this.speed = speed;
         this.color = color;
+        this.image = null;
+        this.imageLoaded = false;
+    }
+    
+    loadImage(src) {
+        this.image = new Image();
+        this.image.src = src;
+        this.image.onload = () => {
+            this.imageLoaded = true;
+        };
+        this.image.onerror = () => {
+            console.error(`Failed to load image: ${src}`);
+            this.imageLoaded = false;
+        };
+    }
+}
+
+class DM extends GameObject {
+    constructor(damianX) {
+        super(
+            damianX + 40 - 20,
+            100 + 80,
+            40,
+            40,
+            1 + Math.random() * 0.5,
+            '#ff4444'
+        );
+        this.type = 'dm';
+        this.missed = false;
+        this.message = "";
+        this.rotation = Math.random() * 0.2 - 0.1;
+        this.oscillateOffset = Math.random() * Math.PI * 2;
+        this.emoji = '📱';
+    }
+}
+
+
+class PowerUp extends GameObject {
+    constructor() {
+        const types = {
+            hyperFocus: { 
+                color: '#00ff00', 
+                effect: 'activateHyperFocus',
+                description: "Hiperfokus: Twoja zdolność do skupienia się na jednej rzeczy przez długi czas teraz działa na twoją korzyść!",
+                emoji: '🎯'
+            },
+            impulsivity: { 
+                color: '#ffff00', 
+                effect: 'activateImpulsivity',
+                description: "Impulsywność: Szybkie decyzje i działanie bez zastanowienia - teraz to twoja supermoc!",
+                emoji: '⚡'
+            },
+            creativeChaos: { 
+                color: '#ff9900', 
+                effect: 'activateCreativeChaos',
+                description: "Kreatywny chaos: Twój umysł generuje tysiące pomysłów na minutę - wykorzystaj to przeciwko Damianowi!",
+                emoji: '🌪️'
+            }
+        };
+
+        const typeKeys = Object.keys(types);
+        const selectedType = typeKeys[Math.floor(Math.random() * typeKeys.length)];
+
+        super(
+            Math.random() * (GAME_CONFIG.canvas.width - 30),
+            0,
+            30,
+            30,
+            2,
+            types[selectedType].color
+        );
+        
+        this.type = selectedType;
+        this.effect = types[selectedType].effect;
+        this.description = types[selectedType].description;
+        this.emoji = types[selectedType].emoji;
     }
 }
 
 class Obstacle extends GameObject {
-    constructor(type) {
-        const types = {
-            notification: { color: '#3b5998', width: 30, height: 30 },
-            meme: { color: '#ff4500', width: 40, height: 40 },
-            social: { color: '#1da1f2', width: 35, height: 35 }
-        };
-
+    constructor(x, y, width, height, speed) {
         super(
-            GAME_CONFIG.canvas.width,
-            Math.random() * (GAME_CONFIG.canvas.height - 50),
-            types[type].width,
-            types[type].height,
-            4 + Math.random() * 3,
-            types[type].color
+            x,
+            y,
+            width,
+            height,
+            speed,
+            '#ff0066' // Kolor przeszkody
         );
-        this.type = type;
+        this.type = 'obstacle';
     }
 }
 
-class PowerUp extends GameObject {
-    constructor(type) {
-        const types = {
-            turboFocus: { color: '#00ff00', effect: 'activateTurboFocus' },
-            flashDodge: { color: '#ffff00', effect: 'activateFlashDodge' },
-            hamsterWheel: { color: '#ff9900', effect: 'activateHamsterWheel' }
-        };
 
-        super(
-            GAME_CONFIG.canvas.width,
-            Math.random() * (GAME_CONFIG.canvas.height - 30),
-            25,
-            25,
-            3,
-            types[type].color
-        );
-        this.type = type;
-        this.effect = types[type].effect;
-    }
-}
 
 class FocusPoint extends GameObject {
     constructor() {
         super(
-            GAME_CONFIG.canvas.width,
-            Math.random() * (GAME_CONFIG.canvas.height - 20),
+            Math.random() * (GAME_CONFIG.canvas.width - 15),
+            0, // Start from top
             15,
             15,
             5,
             '#00ffff'
         );
-    }
-}
-
-class Pipe extends GameObject {
-    constructor(isTop, height, gap) {
-        super(
-            GAME_CONFIG.canvas.width,
-            isTop ? 0 : height + gap,
-            60,
-            isTop ? height : GAME_CONFIG.canvas.height - (height + gap),
-            3,
-            '#4a4a4a'
-        );
-        this.type = 'pipe';
     }
 }
