@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', monospace;
+    background-color: #0c0c1d;
+    color: #fff;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#game-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-color: #000;
+    box-shadow: 0 0 20px #ff00ff, 0 0 40px #00ffff;
+    overflow: hidden;
+}
+
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+#start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+#game-title {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    animation: neonFlicker 1.5s infinite alternate;
+}
+
+#start-button {
+    padding: 15px 30px;
+    font-size: 24px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+    font-family: 'Press Start 2P', monospace;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#start-button:hover {
+    transform: scale(1.1);
+}
+
+#score-display {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: #00ffff;
+    text-shadow: 0 0 5px #ff00ff;
+}
+
+#message-box {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    min-height: 60px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #ff00ff;
+    border-radius: 10px;
+    padding: 10px;
+    display: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+#game-over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+    display: none;
+}
+
+#restart-button {
+    padding: 15px 30px;
+    font-size: 24px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+    font-family: 'Press Start 2P', monospace;
+    margin-top: 20px;
+}
+
+#restart-button:hover {
+    transform: scale(1.1);
+}
+
+@keyframes neonFlicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #00ffff;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+}
+
+@media (max-width: 844px) {
+#game-container {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    touch-action: none;
+    overflow: hidden;
+    position: fixed;
+}
+
+#damian-intro-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #ff00ff;
+    text-align: center;
+    z-index: 100;
+}
+
+.dialog-content {
+    color: #fff;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+#ghost-button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    font-size: 20px;
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#damian-intro-dialog {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+    border: 2px solid #ff00ff;
+}
+
+.dialog-content h2 {
+    color: #ff00ff;
+    text-shadow: 0 0 10px #00ffff;
+    margin-bottom: 20px;
+}
+
+.dialog-content p {
+    color: #fff;
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+#ghost-button {
+    background: linear-gradient(45deg, #ff00ff, #00ffff);
+    border: none;
+    padding: 15px 30px;
+    color: #fff;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-transform: uppercase;
+}
+
+#ghost-button:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s;
+}
+
+}
